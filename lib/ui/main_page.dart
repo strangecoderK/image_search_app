@@ -15,6 +15,11 @@ class _MainPageState extends State<MainPage> {
   final _repository = ImageItemRepository();
   var imageItems = [];
 
+  Future<void> searchImages(String query) async {
+    imageItems = await _repository.getImageItems(query);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +49,9 @@ class _MainPageState extends State<MainPage> {
                     color: Color(0xFF4FB6B2),
                   ),
                   suffixIcon: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      searchImages('flower');
+                    },
                     icon: Icon(
                       Icons.search,
                       color: Color(0xFF4FB6B2),
