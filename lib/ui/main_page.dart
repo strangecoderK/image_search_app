@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../date/model/image_item.dart';
 import 'image_item_widget.dart';
 
 class MainPage extends StatefulWidget {
@@ -58,7 +59,11 @@ class _MainPageState extends State<MainPage> {
                       mainAxisSpacing: 30),
                   itemCount: 100,
                   itemBuilder: (BuildContext context, int index) {
-                    return ImageItemWidget();
+                    final ImageItem imageItem = ImageItem(
+                        imageUrl:
+                            'https://cdn.pixabay.com/photo/2018/01/05/16/24/rose-3063284_150.jpg',
+                        tags: 'rose, flower, petal');
+                    return ImageItemWidget(imageItem: imageItem);
                   },
                 ),
               ),

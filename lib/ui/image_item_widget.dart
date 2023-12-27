@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:search_app/date/model/image_item.dart';
 
 class ImageItemWidget extends StatelessWidget {
-  const ImageItemWidget({super.key});
+  const ImageItemWidget({
+    super.key,
+    required this.imageItem,
+  });
+
+  final ImageItem imageItem;
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(30),
       child: Image.network(
-        'https://cdn.pixabay.com/photo/2018/01/05/16/24/rose-3063284_150.jpg',
+        imageItem.imageUrl,
         fit: BoxFit.cover,
       ),
     );
