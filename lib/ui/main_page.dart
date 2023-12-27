@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:search_app/date/repository/image_item_repository.dart';
 
 import '../date/model/image_item.dart';
 import 'image_item_widget.dart';
@@ -11,6 +12,9 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final _repository = ImageItemRepository();
+  var imageItems = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,12 +61,9 @@ class _MainPageState extends State<MainPage> {
                       crossAxisCount: 2,
                       crossAxisSpacing: 30,
                       mainAxisSpacing: 30),
-                  itemCount: 100,
+                  itemCount: imageItems.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final ImageItem imageItem = ImageItem(
-                        imageUrl:
-                            'https://cdn.pixabay.com/photo/2018/01/05/16/24/rose-3063284_150.jpg',
-                        tags: 'rose, flower, petal');
+                    final ImageItem imageItem = imageItems[index];
                     return ImageItemWidget(imageItem: imageItem);
                   },
                 ),
