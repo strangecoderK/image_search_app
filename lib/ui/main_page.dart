@@ -47,10 +47,15 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 20,
+              ),
               Expanded(
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2),
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 30,
+                      mainAxisSpacing: 30),
                   itemCount: 100,
                   itemBuilder: (BuildContext context, int index) {
                     return ImageItemWidget();
