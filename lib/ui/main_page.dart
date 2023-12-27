@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-class SearchImageApp extends StatefulWidget {
-  const SearchImageApp({super.key});
+import 'image_item_widget.dart';
+
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
 
   @override
-  State<SearchImageApp> createState() => _SearchImageAppState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _SearchImageAppState extends State<SearchImageApp> {
+class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,13 +49,12 @@ class _SearchImageAppState extends State<SearchImageApp> {
               ),
               Expanded(
                 child: GridView.builder(
-                  gridDelegate:
-                      SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
                   itemCount: 100,
                   itemBuilder: (BuildContext context, int index) {
-                    return Image.network('https://cdn.pixabay.com/photo/2018/01/05/16/24/rose-3063284_150.jpg');
+                    return ImageItemWidget();
                   },
-
                 ),
               ),
             ],
