@@ -12,13 +12,25 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final _repository = ImageItemRepository();
-  var imageItems = [];
+  final _repository = MockImageItemRepository();
+  List<ImageItem> imageItems = [];
+  final searchTextEditingController = TextEditingController();
+  bool isLoading = false;
 
-  Future<void> searchImages(String query) async {
-    imageItems = await _repository.getImageItems(query);
-    setState(() {});
+  @override
+  void dispose() {
+    searchTextEditingController.dispose();
+    super.dispose();
   }
+  Future<void> searchImages(String query) async {
+    setState(() {
+      isLoading = true;
+    });
+    imageItems = await _repository.getImageItems(query);
+    setState(() {isLoading = false;});
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +41,7 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             children: [
               TextField(
+                controller: searchTextEditingController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -49,9 +62,8 @@ class _MainPageState extends State<MainPage> {
                     color: Color(0xFF4FB6B2),
                   ),
                   suffixIcon: IconButton(
-                    onPressed: () {
-                      searchImages('flower');
-                    },
+                    onPressed: () =>
+                        searchImages(searchTextEditingController.text),
                     icon: Icon(
                       Icons.search,
                       color: Color(0xFF4FB6B2),
@@ -62,7 +74,9 @@ class _MainPageState extends State<MainPage> {
               SizedBox(
                 height: 20,
               ),
-              Expanded(
+              isLoading
+              ? Center(child: CircularProgressIndicator(),)
+              : Expanded(
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,

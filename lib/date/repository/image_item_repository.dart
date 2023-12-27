@@ -1,7 +1,8 @@
 import '../model/image_item.dart';
 
-class ImageItemRepository {
+class MockImageItemRepository {
   Future<List<ImageItem>> getImageItems(String query) async {
+    await Future.delayed(Duration(seconds: 1));
     if (query == 'flower') {
       return [
         ImageItem(
