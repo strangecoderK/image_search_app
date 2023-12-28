@@ -1,8 +1,29 @@
+import 'package:search_app/date/data_source/Pixabay_Api.dart';
+import '../mapper/pixabay_mapper.dart';
 import '../model/image_item.dart';
 
-class MockImageItemRepository {
+abstract interface class ImageItemPerository {
+  Future<List<ImageItem>> getImageItems(String query);
+}
+
+class PixabayImageItemRepository implements ImageItemPerository {
+  @override
+  Future<List<ImageItem>> getImageItems(String query) async {
+    //await Future.delayed(Duration(seconds: 1));
+    final _api = PixabayApi();
+    final dto = await _api.getImageResult(query);
+    if (dto.hits == null) {
+      return [];
+    }
+    return dto.hits!.map((e) => e.toImageItem()).toList();
+  }
+}
+
+class MockImageItemRepository implements ImageItemPerository {
+  @override
   Future<List<ImageItem>> getImageItems(String query) async {
     await Future.delayed(Duration(seconds: 1));
+
     if (query == 'flower') {
       return [
         ImageItem(

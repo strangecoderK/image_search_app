@@ -12,7 +12,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final _repository = MockImageItemRepository();
+  final _repository = PixabayImageItemRepository();
   List<ImageItem> imageItems = [];
   final searchTextEditingController = TextEditingController();
   bool isLoading = false;
@@ -22,15 +22,16 @@ class _MainPageState extends State<MainPage> {
     searchTextEditingController.dispose();
     super.dispose();
   }
+
   Future<void> searchImages(String query) async {
     setState(() {
       isLoading = true;
     });
     imageItems = await _repository.getImageItems(query);
-    setState(() {isLoading = false;});
+    setState(() {
+      isLoading = false;
+    });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -75,20 +76,22 @@ class _MainPageState extends State<MainPage> {
                 height: 20,
               ),
               isLoading
-              ? Center(child: CircularProgressIndicator(),)
-              : Expanded(
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 30,
-                      mainAxisSpacing: 30),
-                  itemCount: imageItems.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final ImageItem imageItem = imageItems[index];
-                    return ImageItemWidget(imageItem: imageItem);
-                  },
-                ),
-              ),
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Expanded(
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 30,
+                            mainAxisSpacing: 30),
+                        itemCount: imageItems.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final ImageItem imageItem = imageItems[index];
+                          return ImageItemWidget(imageItem: imageItem);
+                        },
+                      ),
+                    ),
             ],
           ),
         ),
