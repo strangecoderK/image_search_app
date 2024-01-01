@@ -1,4 +1,4 @@
-import 'package:search_app/date/data_source/Pixabay_Api.dart';
+import 'package:search_app/date/data_source/pixabay_api.dart';
 import '../mapper/pixabay_mapper.dart';
 import '../model/image_item.dart';
 
@@ -22,7 +22,7 @@ class PixabayImageItemRepository implements ImageItemPerository {
 class MockImageItemRepository implements ImageItemPerository {
   @override
   Future<List<ImageItem>> getImageItems(String query) async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
 
     if (query == 'flower') {
       return [
@@ -42,7 +42,7 @@ class MockImageItemRepository implements ImageItemPerository {
           tags: 'spring bird, bird, tit',
         )
       ];
-    } else
+    } else {
       return [
         ImageItem(
           imageUrl:
@@ -55,5 +55,6 @@ class MockImageItemRepository implements ImageItemPerository {
           tags: 'tomato, fresh, red tomato',
         ),
       ];
+    }
   }
 }

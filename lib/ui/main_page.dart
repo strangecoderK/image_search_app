@@ -46,45 +46,46 @@ class _MainPageState extends State<MainPage> {
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       width: 4,
                       color: Color(0xFF4FB6B2),
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       width: 4,
                       color: Color(0xFF4FB6B2),
                     ),
                   ),
                   hintText: 'Search',
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     color: Color(0xFF4FB6B2),
                   ),
                   suffixIcon: IconButton(
                     onPressed: () =>
                         searchImages(searchTextEditingController.text),
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.search,
                       color: Color(0xFF4FB6B2),
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               isLoading
-                  ? Center(
+                  ? const Center(
                       child: CircularProgressIndicator(),
                     )
                   : Expanded(
                       child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 30,
-                            mainAxisSpacing: 30),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 30,
+                                mainAxisSpacing: 30),
                         itemCount: imageItems.length,
                         itemBuilder: (BuildContext context, int index) {
                           final ImageItem imageItem = imageItems[index];
