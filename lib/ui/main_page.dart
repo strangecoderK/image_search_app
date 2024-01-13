@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:search_app/ui/main_view_model.dart';
 import '../date/model/image_item.dart';
-import '../date/repository/pixabay_image_item_repository_impl.dart';
 import 'image_item_widget.dart';
 
 class MainPage extends StatefulWidget {
@@ -11,10 +12,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final _repository = PixabayImageItemRepository();
-  List<ImageItem> imageItems = [];
   final searchTextEditingController = TextEditingController();
-  bool isLoading = false;
 
   @override
   void dispose() {
@@ -22,18 +20,9 @@ class _MainPageState extends State<MainPage> {
     super.dispose();
   }
 
-  Future<void> searchImages(String query) async {
-    setState(() {
-      isLoading = true;
-    });
-    imageItems = await _repository.getImageItems(query);
-    setState(() {
-      isLoading = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<MainViewModel>();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -62,8 +51,8 @@ class _MainPageState extends State<MainPage> {
                     color: Color(0xFF4FB6B2),
                   ),
                   suffixIcon: IconButton(
-                    onPressed: () =>
-                        searchImages(searchTextEditingController.text),
+                    onPressed: () => viewModel
+                        .searchImages(searchTextEditingController.text),
                     icon: const Icon(
                       Icons.search,
                       color: Color(0xFF4FB6B2),
@@ -74,7 +63,7 @@ class _MainPageState extends State<MainPage> {
               const SizedBox(
                 height: 20,
               ),
-              isLoading
+              viewModel.isLoading
                   ? const Center(
                       child: CircularProgressIndicator(),
                     )
@@ -85,9 +74,10 @@ class _MainPageState extends State<MainPage> {
                                 crossAxisCount: 2,
                                 crossAxisSpacing: 30,
                                 mainAxisSpacing: 30),
-                        itemCount: imageItems.length,
+                        itemCount: viewModel.imageItems.length,
                         itemBuilder: (BuildContext context, int index) {
-                          final ImageItem imageItem = imageItems[index];
+                          final ImageItem imageItem =
+                              viewModel.imageItems[index];
                           return ImageItemWidget(imageItem: imageItem);
                         },
                       ),

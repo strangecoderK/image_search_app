@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:search_app/ui/main_page.dart';
+import 'package:search_app/ui/main_view_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +16,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white,),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.white,
+        ),
         useMaterial3: true,
       ),
-      home: MainPage(),
+      home: ChangeNotifierProvider(
+        create: (_) => MainViewModel(),
+        child: MainPage(),
+      ),
     );
   }
 }
