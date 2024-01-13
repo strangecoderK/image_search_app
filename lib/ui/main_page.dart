@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:search_app/date/repository/image_item_repository.dart';
-
 import '../date/model/image_item.dart';
+import '../date/repository/pixabay_image_item_repository_impl.dart';
 import 'image_item_widget.dart';
 
 class MainPage extends StatefulWidget {
