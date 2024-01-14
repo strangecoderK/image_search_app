@@ -3,7 +3,7 @@ import '../data_source/pixabay_api.dart';
 import '../model/image_item.dart';
 import 'image_item_repository.dart';
 
-class PixabayImageItemRepository implements ImageItemRepository {
+class PixabayImageItemRepositoryImpl implements ImageItemRepository {
   @override
   Future<List<ImageItem>> getImageItems(String query) async {
     //await Future.delayed(Duration(seconds: 1));
