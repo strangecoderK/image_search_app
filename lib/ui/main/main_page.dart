@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_app/ui/main_view_model.dart';
-import '../date/model/image_item.dart';
-import 'widget/image_item_widget.dart';
+import 'package:search_app/ui/main/main_state.dart';
+import 'package:search_app/ui/main/main_view_model.dart';
+import '../../date/model/image_item.dart';
+import '../widget/image_item_widget.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -23,6 +24,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<MainViewModel>();
+    final state = MainState();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -63,7 +65,7 @@ class _MainPageState extends State<MainPage> {
               const SizedBox(
                 height: 20,
               ),
-              viewModel.isLoading
+              state.isLoading
                   ? const Center(
                       child: CircularProgressIndicator(),
                     )
@@ -74,10 +76,9 @@ class _MainPageState extends State<MainPage> {
                                 crossAxisCount: 2,
                                 crossAxisSpacing: 30,
                                 mainAxisSpacing: 30),
-                        itemCount: viewModel.imageItems.length,
+                        itemCount: state.imageItems.length,
                         itemBuilder: (BuildContext context, int index) {
-                          final ImageItem imageItem =
-                              viewModel.imageItems[index];
+                          final ImageItem imageItem = state.imageItems[index];
                           return ImageItemWidget(imageItem: imageItem);
                         },
                       ),

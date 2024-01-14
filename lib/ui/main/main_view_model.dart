@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:search_app/date/repository/image_item_repository.dart';
-import '../date/model/image_item.dart';
+import 'package:search_app/ui/main/main_state.dart';
+
 
 class MainViewModel extends ChangeNotifier {
   ImageItemRepository repository;
@@ -9,14 +10,14 @@ class MainViewModel extends ChangeNotifier {
     required this.repository,
   });
 
-  List<ImageItem> imageItems = [];
-  bool isLoading = false;
+  MainState state = MainState();
 
   Future<void> searchImages(String query) async {
-    isLoading = true;
+    state = state.copyWith(isLoading: true);
     notifyListeners();
-    imageItems = await repository.getImageItems(query);
-    isLoading = false;
+    final result = await repository.getImageItems(query);
+
+    state = state.copyWith(isLoading: false, imageItems: result);
     notifyListeners();
   }
 }
