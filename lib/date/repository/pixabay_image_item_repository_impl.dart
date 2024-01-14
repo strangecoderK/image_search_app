@@ -1,5 +1,4 @@
 import 'package:search_app/date/mapper/pixabay_mapper.dart';
-
 import '../data_source/pixabay_api.dart';
 import '../model/image_item.dart';
 import 'image_item_repository.dart';

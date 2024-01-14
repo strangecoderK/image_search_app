@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:search_app/ui/main_view_model.dart';
 import '../date/model/image_item.dart';
-import 'image_item_widget.dart';
+import 'widget/image_item_widget.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

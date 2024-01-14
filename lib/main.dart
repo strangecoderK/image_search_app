@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:search_app/ui/main_page.dart';
-import 'package:search_app/ui/main_view_model.dart';
+import 'routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,17 +11,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.white,
         ),
         useMaterial3: true,
-      ),
-      home: ChangeNotifierProvider(
-        create: (_) => MainViewModel(),
-        child: MainPage(),
       ),
     );
   }
