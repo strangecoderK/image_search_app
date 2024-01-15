@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_app/ui/main/main_state.dart';
 import 'package:search_app/ui/main/main_view_model.dart';
 import '../../date/model/image_item.dart';
 import '../widget/image_item_widget.dart';
@@ -24,7 +23,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<MainViewModel>();
-    final state = MainState();
+    final state = viewModel.state;
     return Scaffold(
       body: SafeArea(
         child: Padding(
